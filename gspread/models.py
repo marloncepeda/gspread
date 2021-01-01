@@ -1976,8 +1976,16 @@ class Worksheet(object):
     @cast_to_a1_notation
     def merge_cells_list(self, listCellMerge):
         
+        grid_range1 = a1_range_to_grid_range("A1:A20", self.id)
+        grid_range2 = a1_range_to_grid_range("C1:E6", self.id)
+        grid_range3 = a1_range_to_grid_range("E3:E10", self.id)
+        
         body = {
-            "requests": listCellMerge
+            "requests": [
+                {"mergeCells": {"mergeType": "MERGE_COLUMNS", "range": grid_range1}},
+                {"mergeCells": {"mergeType": "MERGE_ROWS", "range": grid_range2}},
+                {"mergeCells": {"mergeType": "MERGE_COLUMNS", "range": grid_range3}},
+            ]
         }
 
         return self.spreadsheet.batch_update(body)
