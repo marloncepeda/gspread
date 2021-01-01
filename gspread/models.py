@@ -1972,6 +1972,16 @@ class Worksheet(object):
 
         return self.spreadsheet.batch_update(body)
 
+    #------------- experiment multiple cell
+    @cast_to_a1_notation
+    def merge_cells_list(self, listCellMerge):
+        
+        body = {
+            "requests": listCellMerge
+        }
+
+        return self.spreadsheet.batch_update(body)
+    #---------
 
 class Cell(object):
     """An instance of this class represents a single cell
